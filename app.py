@@ -4,6 +4,7 @@ from models.models import Db, User, Post
 from forms.forms import SignupForm, LoginForm, NewpostForm
 from os import environ
 from passlib.hash import sha256_crypt
+from flask_heroku import Heroku
 
 load_dotenv('.env')
 
@@ -11,8 +12,9 @@ load_dotenv('.env')
 #date = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/lab5b'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/lab5b'
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+heroku = Heroku(app)
 app.secret_key = environ.get('SECRET_KEY')
 Db.init_app(app)
 
